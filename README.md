@@ -7,12 +7,13 @@
 
 
 ## 🖥️ 프로젝트 소개
-중고 게시판 사이트로 물품의 CRUD와 찜이 가능한 사이트
-https://teamsparta.notion.site/3964141ecf7b401d84de9dd72aa04b8b
+중고 게시판 사이트로 물품의 CRUD와 사이트를 DRF로 구현
+
+https://teamsparta.notion.site/DRF-89e4241bfd504e2aaa4d715bf9055d19
 <br>
 
 ## 🕰️ 개발 기간
-* 24.04.15. - 24.04.19. / 5일
+* 24.04.29. - 24.05.02. / 4일
 
 ### 🧑‍🤝‍🧑 맴버구성 
 * 박강균
