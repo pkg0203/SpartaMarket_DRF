@@ -13,3 +13,14 @@ class AccountSignInSerializer(serializers.ModelSerializer):
             "self_introduction",
             "gender"
         )
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= User
+        exclude = [
+            "is_superuser",
+            "password",
+            "last_login",
+            "groups",
+            "user_permissions"
+        ]
