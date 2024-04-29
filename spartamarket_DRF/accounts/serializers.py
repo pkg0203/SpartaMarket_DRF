@@ -5,5 +5,11 @@ class AccountSignInSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            "username"
+            "username",
+            "nickname",
+            "password",
+            "email",
+            "birthday",
+            "self_introduction",
+            "gender"
         )
