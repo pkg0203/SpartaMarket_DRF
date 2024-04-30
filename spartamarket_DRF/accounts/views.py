@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import *
 from .models import *
+from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 
 
@@ -29,9 +30,9 @@ class AccountSignInView(APIView):
 
 
 class AccountDetailView(APIView):
-    # permission_classes = [
-    #     IsAuthenticated
-    # ]
+    permission_classes = [
+        IsAuthenticated
+    ]
     def get_user(self,username):
         return get_object_or_404(User, username=username)
     
@@ -47,3 +48,12 @@ class AccountDetailView(APIView):
                 serializer.save()
                 return Response(serializer.data)
         return Response({"본인만 수정할 수 있습니다. 또는 로그인하지 않았습니다."},status=status.HTTP_401_UNAUTHORIZED)
+
+class LogoutView(APIView):
+    permission_classes = [
+        IsAuthenticated
+    ]
+    def post(self, request):
+        RefreshToken(request.data['refresh']).blacklist()
+        data={f"Log Out has been successfully done."}
+        return Response(data,status=status.HTTP_200_OK)
