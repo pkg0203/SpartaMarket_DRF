@@ -23,8 +23,11 @@ class ProductsView(APIView):
 
 
 class ProductsDetailView(APIView):
+    def get_product(self,product_id):
+        return get_object_or_404(Product, pk=product_id)
+
     def delete(self, request, product_id):
-        product = get_object_or_404(Product, pk=product_id)
+        product = self.get_product(product_id)
         if request.user.is_authenticated:
             if request.user == product.author:
                 product.delete()
@@ -34,4 +37,12 @@ class ProductsDetailView(APIView):
         return Response({"로그인을 해주세요."}, status=status.HTTP_401_UNAUTHORIZED)
 
     def put(self, request, product_id):
-        product = get_object_or_404(Product, pk=product_id)
+        product = self.get_product(product_id)
+        if request.user.is_authenticated:
+            if request.user == product.author:
+                serializer=ProductSerializer(product,data=request.data,partial=True)
+                if serializer.is_valid(raise_exception=True):
+                    serializer.save()
+                    return Response(serializer.data)
+            return Response({"본인의 글이 아닙니다."}, status=status.HTTP_403_FORBIDDEN)
+        return Response({"로그인을 해주세요."}, status=status.HTTP_401_UNAUTHORIZED)
