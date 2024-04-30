@@ -30,5 +30,8 @@ class ProductsDetailView(APIView):
                 product.delete()
                 data = {f"pk : {product_id} is successfully deleted"}
                 return Response(data, status=status.HTTP_200_OK)
-            return Response({"본인의 글이 아닙니다."},status=status.HTTP_403_FORBIDDEN)
-        return Response({"로그인을 해주세요."},status=status.HTTP_401_UNAUTHORIZED)
+            return Response({"본인의 글이 아닙니다."}, status=status.HTTP_403_FORBIDDEN)
+        return Response({"로그인을 해주세요."}, status=status.HTTP_401_UNAUTHORIZED)
+
+    def put(self, request, product_id):
+        product = get_object_or_404(Product, pk=product_id)

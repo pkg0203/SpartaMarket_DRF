@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import User
 
+
 class AccountSignInSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -14,9 +15,10 @@ class AccountSignInSerializer(serializers.ModelSerializer):
             "gender"
         )
 
+
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model= User
+        model = User
         exclude = [
             "is_superuser",
             "password",
