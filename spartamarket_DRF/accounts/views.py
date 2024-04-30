@@ -29,9 +29,9 @@ class AccountSignInView(APIView):
 
 
 class AccountDetailView(APIView):
-    permission_classes = [
-        IsAuthenticated
-    ]
+    # permission_classes = [
+    #     IsAuthenticated
+    # ]
     def get_user(self,username):
         return get_object_or_404(User, username=username)
     
