@@ -6,10 +6,11 @@ from rest_framework_simplejwt.views import (
 from .views import *
 
 urlpatterns = [
-    path("", AccountSignInView.as_view(), name="sign_in"),
-    path("login/", TokenObtainPairView.as_view(), name="log_in"),
-    path("logout/", LogoutView.as_view(), name="log_out"),
-    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("", AccountSignInView.as_view()),
+    path("login/", TokenObtainPairView.as_view()),
+    path("logout/", LogoutView.as_view()),
+    path("password/", PasswordChangeView.as_view()),
+    path("token/refresh/", TokenRefreshView.as_view()),
     
-    path("<str:username>/", AccountDetailView.as_view(), name="get_profile"),
+    path("<str:username>/", AccountDetailView.as_view()),
 ]

@@ -20,7 +20,6 @@ class AccountSignInView(APIView):
         
     def delete(self,request):
         if request.user.is_authenticated:
-            print(request.data)
             if request.user.check_password(request.data["password"]):
                 request.user.delete()
                 data = {f"{request.user.username} is successfully deleted."}
@@ -57,3 +56,18 @@ class LogoutView(APIView):
         RefreshToken(request.data['refresh']).blacklist()
         data={f"Log Out has been successfully done."}
         return Response(data,status=status.HTTP_200_OK)
+    
+class PasswordChangeView(APIView):
+    permission_classes = [
+        IsAuthenticated
+    ]
+    def put(self,request):
+        if request.user.check_password(request.data["password"]):
+            return Response({"이전 비밀번호와 동일합니다."},status=status.HTTP_403_FORBIDDEN)
+        else:
+            serializer = UserPasswordUpdateSerializer(request.user,data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                user = serializer.save()
+                user.set_password(serializer.data['password'])
+                user.save()
+                return Response(serializer.data)
