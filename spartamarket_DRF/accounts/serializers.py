@@ -26,3 +26,16 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "groups",
             "user_permissions"
         ]
+
+#이메일, 이름, 닉네임, 생일 입력 필요하며, 성별, 자기소개
+class UserProfileUpdateSerializer(UserProfileSerializer):
+    class Meta:
+        model = User
+        fields=[
+            'email',
+            'username',
+            'nickname',
+            'birthday',
+            'gender',
+            'self_introduction',
+        ]

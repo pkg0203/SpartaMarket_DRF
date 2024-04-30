@@ -41,7 +41,9 @@ class AccountDetailView(APIView):
     
     def put(self,request,username):
         user=self.get_user(username)
-        serializer = UserProfileSerializer(user,data=request.data,partial=True)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
+        if user == request.user:
+            serializer = UserProfileUpdateSerializer(user,data=request.data,partial=True)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data)
+        return Response({"본인만 수정할 수 있습니다. 또는 로그인하지 않았습니다."},status=status.HTTP_401_UNAUTHORIZED)
