@@ -8,6 +8,7 @@ class User(AbstractUser):
     class GenderChoices(models.TextChoices):
         MALE = 'M', '남성'
         FEMALE = 'F', '여성'
+    email = models.EmailField(unique=True)
     nickname = models.CharField(max_length=50, blank=False)
     birthday = models.DateField(blank=False)
     gender = models.CharField(
