@@ -16,6 +16,16 @@ class AccountSignInView(APIView):
             user.set_password(request.data["password"])
             user.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+    def delete(self,request):
+        if request.user.is_authenticated:
+            print(request.data)
+            if request.user.check_password(request.data["password"]):
+                request.user.delete()
+                data = {f"{request.user.username} is successfully deleted."}
+                return Response(data,status=status.HTTP_200_OK)
+            return Response({"비밀번호가 틀렸습니다."},status=status.HTTP_400_BAD_REQUEST)
+        return Response({"로그인을 해주세요."},status=status.HTTP_401_UNAUTHORIZED)
 
 
 class AccountDetailView(APIView):
