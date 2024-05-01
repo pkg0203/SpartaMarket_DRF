@@ -82,3 +82,35 @@ https://teamsparta.notion.site/DRF-89e4241bfd504e2aaa4d715bf9055d19
 ### < Products >
 
 #### Product 생성 `api/products/` , `POST`
+- 로그인 상태로, `title` , `content` , `image` 를 기입 가능
+- **`image` field는 비울 수 없음**
+  - 또한 **base64** 를 이용하여 encode한 것을 body에 채워야 함
+
+  ![image](https://github.com/pkg0203/SpartaMarket_DRF/assets/141356379/41a1796b-d0ff-4111-80c7-bf935cc5f730)
+
+- 업로드된 image는 `media` 폴더에서 확인 가능 
+
+#### Product 조회 `api/products/` , `GET`
+- 모든 Product를 조회할 수 있다.
+- 로그인하지 않은 상태로 사용할 수 있는 유일한 기능
+
+![image](https://github.com/pkg0203/SpartaMarket_DRF/assets/141356379/6e20348a-2910-461a-8ee4-dda755646f7f)
+
+#### Product 삭제 `api/products/<product_id>` , `DELETE`
+- 로그인 상태로, 본인 글만 삭제 가능
+
+![image](https://github.com/pkg0203/SpartaMarket_DRF/assets/141356379/7795b107-095f-4c60-9f2a-03fd6e45131a)
+
+#### Product 수정 `api/products/<products_id>` , `PUT`
+- 로그인 상태로, 본인 글만 수정 가능
+- 부분 수정 가능
+  - 아래 글의 수정 전 글 상태는 `Product 조회` 에서 확인 할 수 있다.
+  
+  ![image](https://github.com/pkg0203/SpartaMarket_DRF/assets/141356379/7d16d391-d497-4c4e-82cb-dd253f26bd20)
+
+#### Product 좋아요 `api/products/<proucts_id>/like/` , `POST`
+- 로그인 상태에서만 사용 가능
+- body는 빈 상태로 요청만 해도 된다
+  - 팔로우와 마찬가지 로직을 가지고 있다.
+
+ ![image](https://github.com/pkg0203/SpartaMarket_DRF/assets/141356379/113f774f-0632-4e87-afbb-20c26272c60d)
