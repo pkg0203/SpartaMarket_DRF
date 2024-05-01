@@ -55,16 +55,30 @@ https://teamsparta.notion.site/DRF-89e4241bfd504e2aaa4d715bf9055d19
 
 ![image](https://github.com/pkg0203/SpartaMarket_DRF/assets/141356379/f3dbd9b7-0b36-4402-9f6c-194e2f0f17e9)
 
-#### 회원 탈퇴
+#### 회원 탈퇴 `api/accounts/` , `DELETE`
+- 로그인 상태로, body에 자신의 `password`를 담아 요청하면 된다.
+
 ![image](https://github.com/pkg0203/SpartaMarket_DRF/assets/141356379/ac4f0104-41c1-4ec9-be32-d78fc36793a8)
 
-#### 본인 정보 수정
+#### 본인 정보 수정 `api/accounts/<username>/` , `PUT`
+- 로그인 상태로, 본인 정보만 수정할 수 있음
+- 부분 수정도 가능
+  
 ![image](https://github.com/pkg0203/SpartaMarket_DRF/assets/141356379/7c3e25e5-bb28-460a-baa3-bb0a673ecb4c)
 
-#### 비밀번호 변경
+#### 비밀번호 변경 `api/accounts/password/` , `PUT`
 - 이전 비밀번호와 동일할 경우 **변경할 수 없음**
 
 ![image](https://github.com/pkg0203/SpartaMarket_DRF/assets/141356379/d2eafd13-82a6-436d-a9a3-446d84e9661a)
 ![image](https://github.com/pkg0203/SpartaMarket_DRF/assets/141356379/c6249c4e-a86d-4bbe-96a1-2867476aa7c9)
 
+#### 팔로우 `api/accounts/<username>/follow` , `POST`
+- 로그인 상태로, <username> 을 팔로우 하는 요청
+  - 이미 팔로우 중이면, 언팔로우하게 됨
+  - 그렇지 않으면 팔로우하게 됨 
 
+![image](https://github.com/pkg0203/SpartaMarket_DRF/assets/141356379/992c93d8-44fa-4410-ab1d-a5000f80b0e2)
+
+### < Products >
+
+#### Product 생성 `api/products/` , `POST`
