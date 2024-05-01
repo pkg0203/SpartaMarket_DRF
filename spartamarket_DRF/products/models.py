@@ -1,6 +1,5 @@
 from django.db import models
-from accounts.models import User
-
+from django.conf import settings
 # Create your models here.
 
 
@@ -10,7 +9,10 @@ def file_location(instance, filename, **kwargs):
 
 
 class Product(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE
+    )
     title = models.CharField(max_length=100)
     content = models.TextField()
     image = models.ImageField(upload_to=file_location, null=False, blank=True)
