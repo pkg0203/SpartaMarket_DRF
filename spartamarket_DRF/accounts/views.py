@@ -71,3 +71,18 @@ class PasswordChangeView(APIView):
                 user.set_password(serializer.data['password'])
                 user.save()
                 return Response(serializer.data)
+            
+class AccountFollowView(APIView):
+    permission_classes = [
+        IsAuthenticated
+    ]
+    def post(self,request,username):
+        req_user = get_object_or_404(User,username=username)
+        if req_user == request.user:
+            return Response({"스스로를 팔로우 할 수 없습니다."},status=status.HTTP_400_BAD_REQUEST)
+        elif req_user in request.user.follow.all():
+            request.user.follow.remove(req_user)
+            return Response({"팔로우 목록에서 제거했습니다."},status=status.HTTP_200_OK)
+        else :
+            request.user.follow.add(req_user)
+            return Response({"팔로우 목록에 추가했습니다."},status=status.HTTP_200_OK)

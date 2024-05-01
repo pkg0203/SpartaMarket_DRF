@@ -17,6 +17,8 @@ class AccountSignInSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    following = serializers.IntegerField(source="follow.count", read_only=True)
+    follower = serializers.IntegerField(source="follower.count", read_only=True)
     class Meta:
         model = User
         fields=[
@@ -26,7 +28,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'nickname',
             'gender',
             'birthday',
-            'self_introduction'
+            'self_introduction',
+            'following',
+            'follower'
         ]
 
 #이메일, 이름, 닉네임, 생일 입력 필요하며, 성별, 자기소개

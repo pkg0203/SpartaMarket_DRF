@@ -13,4 +13,5 @@ urlpatterns = [
     path("token/refresh/", TokenRefreshView.as_view()),
     
     path("<str:username>/", AccountDetailView.as_view()),
+    path("<str:username>/follow/", AccountFollowView.as_view()),
 ]
