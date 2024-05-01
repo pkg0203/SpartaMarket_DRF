@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .serializers import *
 
@@ -46,3 +47,15 @@ class ProductsDetailView(APIView):
                     return Response(serializer.data)
             return Response({"본인의 글이 아닙니다."}, status=status.HTTP_403_FORBIDDEN)
         return Response({"로그인을 해주세요."}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+class ProductLikeView(APIView):
+    permission_classes=[IsAuthenticated]
+    def post(self,request,product_id):
+        product = get_object_or_404(Product,pk=product_id)
+        if product in request.user.like.all():
+            request.user.like.remove(product)
+            return Response({"좋아요에서 제거했습니다."})
+        else:
+            request.user.like.add(product)
+            return Response({"좋아요에 추가했습니다."})
