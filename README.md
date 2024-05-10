@@ -22,7 +22,7 @@ https://teamsparta.notion.site/DRF-89e4241bfd504e2aaa4d715bf9055d19
 
 ### ⚙️ 개발 환경
 - **Backend** 및 **API** : `Python`, `Postman`
-- **Framework** : `Django 4.2v`, 'rest_framework'
+- **Framework** : `Django 4.2v`, `rest_framework`
 - **Database** : `SQLite3`
 <br>
 
